@@ -11,12 +11,11 @@ import javafx.scene.text.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.*;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class Cards extends Application {
 
-  private boolean isAnswerVisible = false;//show/hide answer
+  private boolean isAnswerVisible = true;//show/hide answer
 
   public static void main(String[] args) {
     launch(args);
@@ -24,28 +23,28 @@ public class Cards extends Application {
 
   // Make Grid
   @Override
-  public void start(Stage primaryStage) {
+  public void start(Stage primaryStage) throws Exception {
     GridPane grid = new GridPane();
     grid.setAlignment(Pos.CENTER);
     grid.setHgap(10);
     grid.setVgap(10);
     grid.setPadding(new Insets(25, 25, 25, 25));
-    Scene scene = new Scene(grid, 500, 500);
+    Scene scene = new Scene(grid, 1000, 500);
     primaryStage.setScene(scene);
 
     // Front of card/Editable title
-    TextField titleField = new TextField();
+    TextField titleField = new TextField("Enter Term");
     titleField.setFont(Font.font("TimesNewRoman", FontWeight.BOLD, 30));
     grid.add(titleField, 0, 0, 1, 1);
 
     // Back of card/Editable definition (initially hidden)
-    TextField definitionField = new TextField();
+    TextField definitionField = new TextField("Enter Definition");
     definitionField.setFont(Font.font("TimesNewRoman", FontWeight.NORMAL, 15));
     grid.add(definitionField, 0, 1, 1, 1);
-    definitionField.setVisible(false);
+    definitionField.setVisible(true);
 
     // Button
-    Button showBack = new Button("Reveal Answer");
+    Button showBack = new Button("Hide Answer");
     showBack.setOnAction(act -> {
       isAnswerVisible = !isAnswerVisible;
       definitionField.setVisible(isAnswerVisible);
@@ -61,7 +60,33 @@ public class Cards extends Application {
       saveData(title, definition);
     });
     grid.add(saveButton, 0, 3, 3, 1);
-
+    //arrow keys
+    Button leftArrow = new Button("<");
+    leftArrow.setOnAction(act -> {
+       try (BufferedReader buffRead = new BufferedReader(new FileReader("flashcards.txt"))) {
+           String line;
+           while ((line = buffRead.readLine()) != null) {
+               System.out.println(line);
+           }
+       } catch (IOException e) {
+           e.printStackTrace(); // Handle the exception appropriately
+       }
+      });
+   grid.add(leftArrow, 1, 3, 1, 1);
+   //
+   Button rightArrow = new Button(">");
+   rightArrow.setOnAction(act -> {
+      try(BufferedReader buffRead = new BufferedReader(new FileReader("flashcards.txt"))) {
+           String line;
+           while ((line = buffRead.readLine()) != null) {
+               System.out.println(line);
+           }
+       } catch (IOException e) {
+           e.printStackTrace(); // Handle the exception appropriately
+       }
+      });
+   grid.add(rightArrow, 2, 3, 1, 1);
+    //
     primaryStage.show();
   }
 

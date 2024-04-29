@@ -26,6 +26,35 @@ public class StudyZone extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+/*
+//***PROBABLY DELETE LATER***
+      Label welcomeLabel = new Label("Welcome to 'Study Zone'");
+      //
+      HBox hbox = new HBox(welcomeLabel);
+      //
+      Scene scene = new Scene(hbox);
+      //
+      primaryStage.setScene(scene);
+      //
+      //Make button
+      Button okBtn = new Button();
+      okBtn.setText("OK");
+      okBtn.setOnAction(new EventHandler<ActionEvent>() {
+         @Override
+         public void handle(ActionEvent event) {
+            System.out.println("This button will eventualy make the window close");
+         }
+      });
+      
+      StackPane root = new StackPane();
+      root.getChildren().add(okBtn);
+      primaryStage.setScene(new Scene(root, 300, 250));
+      //
+      primaryStage.setTitle("Welcome to 'Study Zone'");
+      //
+      primaryStage.show();
+      
+*/
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);

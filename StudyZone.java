@@ -11,6 +11,8 @@ import javafx.scene.text.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.*;
+import javafx.scene.web.WebView;
+
 
 //
 public class StudyZone extends Application {
@@ -85,6 +87,9 @@ public class StudyZone extends Application {
             System.out.println("This will eventualy give input to the API");
          }
       });
+      WebView viewer = new WebView();
+      webView.getEngine().load("https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1");
+      grid.add(viewer, 2, 4);
       //
       // show screen
       primaryStage.show();

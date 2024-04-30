@@ -1,6 +1,1 @@
-dog:a canine
-cat:feline
-bird:flying thing
-rabbit:hare
-Dog:mans best friend
-dog:cat
+Term:Definition

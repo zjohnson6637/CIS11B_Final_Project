@@ -32,7 +32,7 @@ public class StudyZone extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Scene scene = new Scene(grid, 400, 275);
+        Scene scene = new Scene(grid, 1000, 275);
 
         Text scenetitle = new Text("Welcome to 'Study Zone'");
         scenetitle.setId("welcome-text");
@@ -105,7 +105,6 @@ public class StudyZone extends Application {
                 }
             }
         });
-
         primaryStage.setScene(scene);
         primaryStage.setTitle("Study Zone");
         primaryStage.show();

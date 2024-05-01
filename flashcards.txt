@@ -1,1 +1,5 @@
 Term:Definition
+doctor who:time lord
+clara:Companion
+Rory:Companion
+dave the diver:video game character

@@ -17,6 +17,7 @@ import java.util.List;
 public class Cards extends Application {
 
     // Fields for UI components and data storage
+    private String fileName = "default list";
     private TextField titleField;
     private TextField definitionField;
     private List<String> flashcards = new ArrayList<>(); // List to store flashcards
@@ -37,7 +38,6 @@ public class Cards extends Application {
         grid.setPadding(new Insets(25, 25, 25, 25)); // Set padding around the grid
         Scene scene = new Scene(grid, 1000, 500); // Create a scene with specified dimensions
         primaryStage.setScene(scene); // Set the scene on the primary stage
-
         // TextField for entering the term (title) of the flashcard
         titleField = new TextField("Enter Term");
         titleField.setFont(Font.font("TimesNewRoman", 30)); // Set font size and style
@@ -50,7 +50,7 @@ public class Cards extends Application {
         definitionField.setVisible(true); // Initially hide the definition field
 
         // Button to toggle showing/hiding the definition of the current flashcard
-        Button showBack = new Button("Show Definition");
+        Button showBack = new Button("Hide Definition");
         showBack.setOnAction(e -> {
             if (flashcards.isEmpty()) return;
 
@@ -108,18 +108,34 @@ public class Cards extends Application {
         Button newCard = new Button("New Card");
         newCard.setOnAction(e -> clearFields()); 
         grid.add(newCard, 3, 3);
-        
+        //search button
+        Button search = new Button("Search");  
+        search.setOnAction(e -> NewWindow());       
+        grid.add(search, 3, 4);
+        //
         primaryStage.show(); // Display the primary stage
-
         // Load existing flashcards from file when the application starts
         loadFlashcards();
         // Display the initial flashcard (if any)
         displayCurrentCard();
+        
+        //New List text field
+        TextField listField = new TextField("Enter list name");
+        grid.add(listField, 2, 2);
+        //New List Button
+        
+        Button newList = new Button("New List");
+        newList.setOnAction(e -> {
+         fileName = listField.getText();
+         newFile(fileName);
+         clearFields();
+         });
+        grid.add(newList, 3, 5);
     }
 
     // Method to save a flashcard (title and definition) to a file
     private void saveData(String title, String definition) {
-        try (FileWriter writer = new FileWriter("flashcards.txt", true)) {
+        try (FileWriter writer = new FileWriter(fileName, true)) {
             writer.write(title + ":" + definition + "\n"); // Write flashcard data to file
             System.out.println("Data saved successfully!");
         } catch (IOException ex) {
@@ -130,7 +146,7 @@ public class Cards extends Application {
 
     // Method to load flashcards from a file
     private void loadFlashcards() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("flashcards.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 flashcards.add(line); // Add each line (flashcard) from file to the list
@@ -172,4 +188,25 @@ public class Cards extends Application {
         titleField.setText(""); // Clear the title field
         definitionField.setText(""); // Clear the definition field
     }
+    // Method to add a new Stage
+    public void NewWindow() {
+      GridPane grid = new GridPane();
+      grid.setAlignment(Pos.CENTER);
+      grid.setHgap(10);
+      grid.setVgap(10);
+      grid.setPadding(new Insets(25, 25, 25, 25));
+      Stage secondaryStage = new Stage();
+      secondaryStage.setTitle("StudyZone");
+      Scene scene = new Scene(grid, 1000, 275);
+      secondaryStage.setScene(scene);
+      secondaryStage.show();
+   }
+   //Method to add a new file
+   public void newFile(String listName) {
+      try (FileWriter writer = new FileWriter(listName)) {
+      } catch (IOException ex) {
+         ex.printStackTrace();
+         System.out.println("Error saving data!");
+      }
+   }
 }

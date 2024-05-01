@@ -19,42 +19,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class StudyZone extends Application {
+public class StudyZone2 extends Application {
 
     private static final String API_KEY = "AIzaSyBlkhaalR6dxTwVDsWiMxn0CHPFvBsfY_k";
     private static final String SEARCH_ENGINE_ID = "d415f0d346923497a";
 
     @Override
     public void start(Stage primaryStage) {
-/*
-//***PROBABLY DELETE LATER***
-      Label welcomeLabel = new Label("Welcome to 'Study Zone'");
-      //
-      HBox hbox = new HBox(welcomeLabel);
-      //
-      Scene scene = new Scene(hbox);
-      //
-      primaryStage.setScene(scene);
-      //
-      //Make button
-      Button okBtn = new Button();
-      okBtn.setText("OK");
-      okBtn.setOnAction(new EventHandler<ActionEvent>() {
-         @Override
-         public void handle(ActionEvent event) {
-            System.out.println("This button will eventualy make the window close");
-         }
-      });
-      
-      StackPane root = new StackPane();
-      root.getChildren().add(okBtn);
-      primaryStage.setScene(new Scene(root, 300, 250));
-      //
-      primaryStage.setTitle("Welcome to 'Study Zone'");
-      //
-      primaryStage.show();
-      
-*/
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
